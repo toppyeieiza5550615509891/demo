@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+    <script src="//netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
+    <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+    <!-- <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous"> -->
+    <title>Document</title>
+</head>
+<body>
+   
+    
+    
+    {% if user == 'admin' %}
+            
+        
+    <nav class="navbar navbar-light bg-light justify-content-end">
+        <a class="navbar-brand" href="/blog">Blog</a>
+        <a class="navbar-brand" href="/blog/addblog">Add blog</a>   
+        <a class="navbar-brand" href="/profile">Profile</a>   
+        <a class="navbar-brand" href="/blog/signout">Sign Out</a>  
+    </nav>
+
+        {% for blog in blogs %}
+        <div class="container">
+            <div class="col-md-12 ">
+                <a href='/blog/{{blog.pk}}'><h1>{{blog.text}}</h1></a>
+                <p>'You ought to be ashamed of yourself for asking such a simple question,' added the Gryphon; and then they both sat silent and looked at poor Alice, who felt ready to sink into the earth. At last the Gryphon said to the Mock Turtle, 'Drive on, old fellow! Don't be all day about it!' and he went on in these words:
+                'Yes, we went to school in the sea, though you mayn't believe it—'
+                'I never said I didn't!' interrupted Alice.
+                'You did,' said the Mock Turtle.</p>                    
+                <span class="badge">Posted 2012-08-02 20:47:04</span><div class="pull-right"><span class="label label-default">alice</span> <span class="label label-primary">story</span> <span class="label label-success">blog</span> <span class="label label-info">personal</span> <span class="label label-warning">Warning</span>
+                <span class="label label-danger">Danger</span>
+            </div>         
+        </div>
+        </div>
+                    
+        <!-- <div class="jumbotron container mt-4">
+            <a href="/blog/{{blog.pk}}"><h1 class="display-4">{{blog.text}}</h1></a>
+            <form action="" method="POST">
+                    <input type="submit" value='delete'>
+            </form>
+        </div>      -->
+        {% endfor %}   
+    
+    {% else %}
+        <nav class="navbar navbar-light bg-light justify-content-end">
+            <a class="navbar-brand" href="/blog">Blog</a>
+            <a class="navbar-brand" href="/blog/signout">Sign Out</a>  
+            <a class="navbar-brand" href="/profile">Profile</a>        
+        </nav>
+
+        {% for blog in blogs %}
+        <div class="container">
+            <div class="col-md-12 ">
+                <a href='/blog/{{blog.pk}}'><h1>{{blog.text}}</h1></a>
+                <p>'You ought to be ashamed of yourself for asking such a simple question,' added the Gryphon; and then they both sat silent and looked at poor Alice, who felt ready to sink into the earth. At last the Gryphon said to the Mock Turtle, 'Drive on, old fellow! Don't be all day about it!' and he went on in these words:
+                'Yes, we went to school in the sea, though you mayn't believe it—'
+                'I never said I didn't!' interrupted Alice.
+                'You did,' said the Mock Turtle.</p>                    
+                <span class="badge">Posted 2012-08-02 20:47:04</span><div class="pull-right"><span class="label label-default">alice</span> <span class="label label-primary">story</span> <span class="label label-success">blog</span> <span class="label label-info">personal</span> <span class="label label-warning">Warning</span>
+                <span class="label label-danger">Danger</span>
+            </div>         
+        </div>
+        </div>
+        {% endfor %}   
+
+    {% comment %} pagination section {% endcomment %}
+    <div class='d-flex justify-content-center'>
+        
+        {% if is_paginated %}
+            <ul class="pagination">
+            {% if page_obj.has_previous %}
+                <li>
+                    <span><a href="?page={{ page_obj.previous_page_number }}">Previous</a></span>
+                </li>
+            {%else%}
+                <li class="page-item disabled">
+                <a class="page-link" href="#" tabindex="-1" aria-disabled="true">Previous</a>
+                </li>
+            {% endif %}
+            {% for i in paginator.page_range %}
+                <li class="page-item"><a class="page-link" href='?page={{i}}'>{{i}}</a></li>
+            {% endfor %}
+                
+            {% if page_obj.has_next %}
+                <li>
+                    <span><a href="?page={{ page_obj.next_page_number }}">Next</a></span>
+                </li>
+            {%else%}
+                <li class="page-item disabled">
+                <a class="page-link" href="#" tabindex="-1" aria-disabled="true">Next</a>
+                </li>
+            {% endif %}
+            </ul>
+            {% else %}
+        {% endif %}
+    </div>
+
+    
+    
+    
+    {% endif %}
+    
+    </div>
+</body>
+</html>
+
+
+
